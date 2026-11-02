@@ -1,5 +1,7 @@
 # Rodrigo Castro · Portafolio
 
+[Ver portafolio](https://rsebxc.github.io/) · [Repositorio](https://github.com/RSebXC/rsebxc.github.io) · [Despliegues](https://github.com/RSebXC/rsebxc.github.io/actions/workflows/deploy.yml)
+
 Landing personal en español de **Rodrigo Sebastián Castro Aguilar**, desarrollador backend y soporte de bases de datos. Presenta experiencia, formación y seis proyectos con la contribución individual en cada uno.
 
 Sitio 100 % estático: no requiere servidor de aplicaciones, base de datos ni credenciales. Los enlaces de proyectos llevan al código público; el contacto abre el cliente de correo.
@@ -118,4 +120,4 @@ Resultado de la entrega local: **100 en rendimiento, 100 en accesibilidad y 100 
 
 Contenido basado en el CV y las aclaraciones de Rodrigo; repositorios y documentación pública revisados el 2 de noviembre de 2026. Los proyectos grupales identifican el aporte personal y no atribuyen a Rodrigo las APIs de CloudCinema.
 
-El repositorio se entrega con commits pequeños bajo Conventional Commits. La publicación requiere crear el remoto y activar Pages en la cuenta de GitHub.
+El repositorio mantiene commits bajo Conventional Commits. GitHub Pages está configurado para publicar mediante GitHub Actions: cada push a `main` verifica y despliega el sitio en `https://rsebxc.github.io/`.
