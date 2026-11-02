@@ -1,0 +1,59 @@
+---
+import type { Project } from '../data/types';
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+import ProjectDiagram from './ProjectDiagram.astro';
+const { project } = Astro.props as { project: Project };
+---
+
+<article
+  class:list={['project-card', { 'project-featured': project.featured }]}
+  id={project.id}
+  data-reveal
+>
+  <ProjectDiagram diagram={project.diagram} featured={project.featured} />
+  <div class="project-body">
+    <div class="project-meta">
+      <span>{project.category}</span>
+      <span class="mono">/{project.number}</span>
+    </div>
+    <h3>{project.title}</h3>
+    <p class="project-description">{project.description}</p>
+    <p class="project-role">
+      <span class="role-marker" />
+      {project.role}
+    </p>
+    <ul class="tags" aria-label={`Tecnologías de ${project.title}`}>
+      {project.technologies.map((tech) => (
+        <li>{tech}</li>
+      ))}
+    </ul>
+    <details class="project-details">
+      <summary>
+        {site.labels.details}
+        <Icon name="chevron" size={16} />
+      </summary>
+      <div class="details-content">
+        <h4>{site.labels.contribution}</h4>
+        <p>{project.contribution}</p>
+        <h4>{site.labels.technical}</h4>
+        <ul>
+          {project.details.map((detail) => (
+            <li>{detail}</li>
+          ))}
+        </ul>
+      </div>
+    </details>
+    <a
+      class="project-link"
+      href={project.repository}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${site.labels.repository}: ${project.title}`}
+    >
+      <Icon name="github" size={18} />
+      {site.labels.repository}
+      <Icon name="arrow" size={18} />
+    </a>
+  </div>
+</article>

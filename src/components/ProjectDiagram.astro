@@ -1,0 +1,37 @@
+---
+import type { Project } from '../data/types';
+const { diagram, featured } = Astro.props as {
+  diagram: Project['diagram'];
+  featured?: boolean;
+};
+---
+
+<div
+  class:list={['project-diagram', { 'diagram-featured': featured }]}
+  aria-hidden="true"
+>
+  <div class="diagram-top">
+    <span class="diagram-dot" />
+    <span class="mono">{diagram.label}</span>
+    <span class="diagram-cross">+</span>
+  </div>
+  <div class="diagram-flow">
+    {diagram.nodes.map((node, i) => (
+      <Fragment>
+        <span class="diagram-node">
+          <span class="node-index">0{i + 1}</span>
+          {node}
+        </span>
+        {i < diagram.nodes.length - 1 && (
+          <span class="diagram-connector">
+            <span>→</span>
+          </span>
+        )}
+      </Fragment>
+    ))}
+  </div>
+  <div class="diagram-output">
+    <span class="output-line" />
+    <span>{diagram.output}</span>
+  </div>
+</div>

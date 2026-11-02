@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+import { profile } from '../data/profile';
+import { site } from '../data/site';
+import { assetUrl } from '../utils/urls';
+const canonical = new URL(assetUrl(''), Astro.site);
+const ogImage = new URL(assetUrl(profile.ogImage), Astro.site);
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.title,
+  url: canonical.href,
+  image: new URL(assetUrl(profile.portrait), Astro.site).href,
+  sameAs: [profile.github, profile.linkedin],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Ciudad de Guatemala',
+    addressCountry: 'GT',
+  },
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={profile.seo.description} />
+    <meta name="author" content={profile.name} />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="theme-color"
+      content="#f7f8f4"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#111713"
+      media="(prefers-color-scheme: dark)"
+    />
+    <title>{profile.seo.title}</title>
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={assetUrl('favicon.svg')} />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href={assetUrl('favicon-32.png')}
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href={assetUrl('apple-touch-icon.png')}
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_GT" />
+    <meta property="og:site_name" content={profile.shortName} />
+    <meta property="og:title" content={profile.seo.title} />
+    <meta property="og:description" content={profile.seo.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={profile.ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={profile.seo.title} />
+    <meta name="twitter:description" content={profile.seo.description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={profile.ogImageAlt} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(person).replace(/</g, '\\u003c')}
+    />
+    <script is:inline>
+      try {
+        const theme = localStorage.getItem('portfolio-theme');
+        if (theme === 'light' || theme === 'dark')
+          document.documentElement.dataset.theme = theme;
+      } catch {
+        /* System preference remains available when storage is blocked. */
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">
+      {site.labels.skip}
+    </a>
+    <slot />
+    <script src="../scripts/interactions.ts"></script>
+  </body>
+</html>

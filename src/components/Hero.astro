@@ -1,0 +1,99 @@
+---
+import { profile } from '../data/profile';
+import { site } from '../data/site';
+import { assetUrl } from '../utils/urls';
+import Icon from './Icon.astro';
+---
+
+<section class="hero container" id="inicio" aria-labelledby="hero-title">
+  <div class="hero-content">
+    <p class="eyebrow hero-eyebrow">
+      <span class="status-dot" />
+      {site.hero.eyebrow}
+    </p>
+    <h1 id="hero-title">
+      {profile.firstNames}
+      <br />
+      <span>
+        {profile.lastNames}
+        <span class="name-period">.</span>
+      </span>
+    </h1>
+    <p class="hero-title">{profile.title}</p>
+    <p class="hero-intro">{profile.introduction}</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href={assetUrl(profile.cv)} download>
+        <Icon name="download" size={18} />
+        {site.labels.download}
+      </a>
+      <a class="button button-quiet" href="#proyectos">
+        {site.labels.projects}
+        <Icon name="right" size={18} />
+      </a>
+    </div>
+    <div class="hero-socials">
+      <a href={profile.github} target="_blank" rel="noopener noreferrer">
+        <Icon name="github" size={18} />
+        {site.labels.github}
+        <Icon name="arrow" size={13} />
+      </a>
+      <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+        <Icon name="linkedin" size={18} />
+        {site.labels.linkedin}
+        <Icon name="arrow" size={13} />
+      </a>
+      <a href="#contacto">
+        <Icon name="mail" size={18} />
+        {site.labels.contactButton}
+      </a>
+    </div>
+  </div>
+  <div class="hero-aside">
+    <div class="portrait-panel">
+      <div class="portrait-topline">
+        <span class="eyebrow">{site.hero.profileLabel}</span>
+        <span class="crosshair" aria-hidden="true">
+          +
+        </span>
+      </div>
+      <div class="portrait-frame">
+        <img
+          src={assetUrl(profile.portrait)}
+          alt={profile.portraitAlt}
+          width="480"
+          height="480"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+      <div class="portrait-bottomline">
+        <span>
+          <Icon name="pin" size={15} />
+          {profile.locationShort}
+        </span>
+        <span class="mono" aria-hidden="true">
+          &lt;/&gt;
+        </span>
+      </div>
+    </div>
+    <div class="code-note" aria-label={site.hero.profileCaption}>
+      <div class="code-note-header">
+        <span class="terminal-dots" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+        </span>
+        <span>{site.hero.terminalTitle}</span>
+      </div>
+      <pre aria-hidden="true"><code><span class="code-key">{site.hero.terminalKey}</span> = [
+{site.hero.terminalValues.map((value, index) => <Fragment>  <span class="code-string">"{value}"</span>{index < site.hero.terminalValues.length - 1 ? ',' : ''}{'\n'}</Fragment>)}];</code></pre>
+    </div>
+  </div>
+  <div class="hero-baseline">
+    <p>{profile.tagline}</p>
+    <a href="#proyectos">
+      {site.hero.scroll}
+      <Icon name="down" size={16} />
+    </a>
+  </div>
+</section>

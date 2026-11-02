@@ -1,0 +1,50 @@
+---
+import { profile } from '../data/profile';
+import { site } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+---
+
+<section
+  class="section container contact-section"
+  id="contacto"
+  aria-label={site.sections.contact.eyebrow}
+>
+  <SectionHeading {...site.sections.contact} />
+  <div class="contact-row" data-reveal>
+    <div class="contact-email">
+      <p class="eyebrow">{site.sections.contact.emailLabel}</p>
+      <a href={`mailto:${profile.email}`}>
+        {profile.email}
+        <Icon name="arrow" size={28} />
+      </a>
+    </div>
+    <button
+      class="copy-button"
+      type="button"
+      data-copy-email={profile.email}
+      data-copied={site.labels.copied}
+      data-copy-error={site.labels.copyError}
+    >
+      <Icon name="copy" size={18} />
+      <span>{site.labels.copy}</span>
+    </button>
+  </div>
+  <p class="copy-status" role="status" aria-live="polite" id="copy-status"></p>
+  <div class="contact-bottom">
+    <span>
+      <Icon name="pin" size={17} />
+      {profile.location}
+    </span>
+    <div>
+      <a href={profile.github} target="_blank" rel="noopener noreferrer">
+        {site.labels.github}
+        <Icon name="arrow" size={16} />
+      </a>
+      <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+        {site.labels.linkedin}
+        <Icon name="arrow" size={16} />
+      </a>
+    </div>
+  </div>
+</section>

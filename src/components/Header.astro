@@ -1,0 +1,26 @@
+---
+import { profile } from '../data/profile';
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#inicio" aria-label={site.labels.home}>
+      <span class="brand-mark" aria-hidden="true">
+        {profile.initials}
+        <span>.</span>
+      </span>
+      <span class="brand-name">{profile.shortName}</span>
+    </a>
+    <nav aria-label={site.labels.navigation}>
+      {site.nav.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+    <a class="header-contact" href="#contacto">
+      {site.labels.contact}
+      <Icon name="arrow" size={17} />
+    </a>
+  </div>
+</header>

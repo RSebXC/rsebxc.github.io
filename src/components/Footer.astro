@@ -1,0 +1,27 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <p>
+        © {new Date().getFullYear()} {site.footer.rights}
+      </p>
+      <p class="footer-note">{site.footer.line}</p>
+    </div>
+    <div class="theme-control">
+      <label for="theme">{site.labels.theme}</label>
+      <select id="theme" aria-label={site.labels.theme}>
+        <option value="system">{site.labels.system}</option>
+        <option value="light">{site.labels.light}</option>
+        <option value="dark">{site.labels.dark}</option>
+      </select>
+    </div>
+    <a class="back-top" href="#inicio">
+      {site.labels.backToTop}
+      <Icon name="arrow" size={16} />
+    </a>
+  </div>
+</footer>

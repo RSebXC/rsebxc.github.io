@@ -1,0 +1,42 @@
+---
+import { education } from '../data/education';
+import { site } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+---
+
+<section
+  class="education-wrap"
+  id="formacion"
+  aria-label={site.sections.education.eyebrow}
+>
+  <div class="section container">
+    <SectionHeading {...site.sections.education} />
+    <div class="education-grid">
+      <div class="degree" data-reveal>
+        <Icon name="book" size={28} />
+        <p class="mono">{education.degree.period}</p>
+        <h3>{education.degree.title}</h3>
+        <p>{education.degree.institution}</p>
+        <span class="degree-status">{education.degree.status}</span>
+      </div>
+      <div class="education-extra" data-reveal>
+        <p class="eyebrow">{site.sections.education.certification}</p>
+        <h3>{education.certification.title}</h3>
+        <p>{education.certification.institution}</p>
+        <p class="mono">{education.certification.detail}</p>
+        <div class="languages">
+          <h3>{site.sections.education.languages}</h3>
+          <dl>
+            {education.languages.map((language) => (
+              <div>
+                <dt>{language.name}</dt>
+                <dd>{language.level}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

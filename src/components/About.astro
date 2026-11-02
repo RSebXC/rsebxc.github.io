@@ -1,0 +1,36 @@
+---
+import { profile } from '../data/profile';
+import { site } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section
+  class="about-wrap"
+  id="sobre-mi"
+  aria-label={site.sections.about.eyebrow}
+>
+  <div class="container section about-grid">
+    <div>
+      <SectionHeading {...site.sections.about} />
+      <div class="principles">
+        {profile.principles.map((principle) => (
+          <span>{principle}</span>
+        ))}
+      </div>
+    </div>
+    <div class="about-copy" data-reveal>
+      {profile.about.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
+    <div class="focus-grid">
+      {profile.focus.map((item) => (
+        <div class="focus-item" data-reveal>
+          <span class="mono">/{item.number}</span>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

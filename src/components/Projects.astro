@@ -1,0 +1,19 @@
+---
+import { projects } from '../data/projects';
+import { site } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+import ProjectCard from './ProjectCard.astro';
+---
+
+<section
+  class="section container"
+  id="proyectos"
+  aria-label={site.sections.projects.eyebrow}
+>
+  <SectionHeading {...site.sections.projects} />
+  <div class="projects-grid">
+    {projects.map((project) => (
+      <ProjectCard project={project} />
+    ))}
+  </div>
+</section>
