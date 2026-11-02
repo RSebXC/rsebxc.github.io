@@ -112,6 +112,8 @@ npx lighthouse http://localhost:4321/ --only-categories=performance,accessibilit
 
 El objetivo es 95+ en rendimiento, accesibilidad y SEO. Las mediciones locales son una referencia: repite la auditoría sobre la URL publicada, porque red, hosting y dispositivo afectan el resultado.
 
+Resultado de la entrega local: **100 en rendimiento, 100 en accesibilidad y 100 en SEO**, tanto en móvil como en escritorio. Consulta [las comprobaciones y sus límites](docs/verification.md).
+
 ## Fuentes del contenido
 
 Contenido basado en el CV y las aclaraciones de Rodrigo; repositorios y documentación pública revisados el 2 de noviembre de 2026. Los proyectos grupales identifican el aporte personal y no atribuyen a Rodrigo las APIs de CloudCinema.
