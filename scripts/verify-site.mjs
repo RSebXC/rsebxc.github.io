@@ -15,9 +15,9 @@ assert.equal(
   'Exactly one h1 is required.',
 );
 assert.equal(
-  (html.match(/class="project-card(?: project-featured)?"/g) || []).length,
-  6,
-  'All six projects must be rendered.',
+  (html.match(/<article[^>]*\bdata-project-card\b/g) || []).length,
+  9,
+  'All nine selected projects must be rendered.',
 );
 for (const name of [
   'description',
@@ -71,5 +71,5 @@ assert.ok(
   ),
 );
 console.log(
-  `Static output verified: 6 projects, metadata, anchors, assets and base path "${base || '/'}".`,
+  `Static output verified: 9 projects, metadata, anchors, assets and base path "${base || '/'}".`,
 );

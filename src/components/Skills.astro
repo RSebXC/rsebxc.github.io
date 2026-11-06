@@ -3,6 +3,7 @@ import { skillGroups } from '../data/skills';
 import { site } from '../data/site';
 import SectionHeading from './SectionHeading.astro';
 import Icon from './Icon.astro';
+import TechIcon from './TechIcon.astro';
 ---
 
 <section
@@ -22,7 +23,10 @@ import Icon from './Icon.astro';
         </div>
         <ul>
           {group.skills.map((skill) => (
-            <li>{skill}</li>
+            <li>
+              <TechIcon name={skill} size={17} />
+              {skill}
+            </li>
           ))}
         </ul>
       </div>

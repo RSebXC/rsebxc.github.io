@@ -1,37 +1,300 @@
 ---
 import type { Project } from '../data/types';
-const { diagram, featured } = Astro.props as {
-  diagram: Project['diagram'];
-  featured?: boolean;
-};
+import { site } from '../data/site';
+import { assetUrl } from '../utils/urls';
+const { project } = Astro.props as { project: Project };
 ---
 
-<div
-  class:list={['project-diagram', { 'diagram-featured': featured }]}
-  aria-hidden="true"
->
-  <div class="diagram-top">
-    <span class="diagram-dot" />
-    <span class="mono">{diagram.label}</span>
-    <span class="diagram-cross">+</span>
+<div class:list={['project-diagram', `visual-${project.visual}`]}>
+  <div class="visual-badges">
+    <span class="kind-badge">
+      {project.kind === 'own' ? site.labels.own : site.labels.collaboration}
+    </span>
+    <span class="stage-badge">{project.stage}</span>
   </div>
-  <div class="diagram-flow">
-    {diagram.nodes.map((node, i) => (
-      <Fragment>
-        <span class="diagram-node">
-          <span class="node-index">0{i + 1}</span>
-          {node}
-        </span>
-        {i < diagram.nodes.length - 1 && (
-          <span class="diagram-connector">
-            <span>→</span>
-          </span>
-        )}
-      </Fragment>
-    ))}
-  </div>
-  <div class="diagram-output">
-    <span class="output-line" />
-    <span>{diagram.output}</span>
+  {project.visual === 'finance' ? (
+    <div class="phone-preview">
+      <div class="phone-frame phone-main">
+        <img
+          src={assetUrl('images/projects/finanzas-home.webp')}
+          alt="Pantalla de Mis Finanzas en Android con datos ficticios"
+          width="450"
+          height="1000"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="phone-frame phone-secondary">
+        <img
+          src={assetUrl('images/projects/finanzas-trend.webp')}
+          alt="Reportes y gráficas de Mis Finanzas con datos ficticios"
+          width="450"
+          height="1000"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  ) : (
+    <svg
+      class="architecture-art"
+      viewBox="0 0 480 210"
+      fill="none"
+      aria-hidden="true"
+    >
+      {project.visual === 'routes' ? (
+        <>
+          <path
+            class="art-muted-line"
+            d="M62 112 155 42 248 84 336 34 420 100M62 112 146 171 248 84 335 176 420 100M155 42l-9 129M336 34l-1 142M248 84l172 16"
+          />
+          <path class="art-highlight-line" d="M62 112 155 42 248 84 420 100" />
+          {[
+            [62, 112, 'A'],
+            [155, 42, 'B'],
+            [146, 171, 'C'],
+            [248, 84, 'D'],
+            [336, 34, 'E'],
+            [335, 176, 'F'],
+            [420, 100, 'G'],
+          ].map(([x, y, label]) => (
+            <g>
+              <circle class="art-node" cx={x} cy={y} r="17" />
+              <text
+                x={x}
+                y={Number(y) + 4}
+                class="art-node-label"
+                text-anchor="middle"
+              >
+                {label}
+              </text>
+            </g>
+          ))}
+        </>
+      ) : project.visual === 'queue' ? (
+        <>
+          {[36, 147, 258, 369].map((x, i) => (
+            <g>
+              <rect
+                class="art-sheet"
+                x={x}
+                y="42"
+                width="78"
+                height="126"
+                rx="9"
+              />
+              <rect
+                class="art-chip"
+                x={x + 11}
+                y="56"
+                width="56"
+                height="19"
+                rx="4"
+              />
+              <path
+                class="art-muted-line"
+                d={`M${x + 14} 95h48m-48 17h36m-36 17h43m-43 17h25`}
+              />
+              <text
+                class="art-small-label"
+                text-anchor="middle"
+                x={x + 39}
+                y="196"
+              >
+                {project.diagram.nodes[i]}
+              </text>
+              {i < 3 && (
+                <path
+                  class="art-highlight-line"
+                  d={`M${x + 83} 102h22m-6-5 6 5-6 5`}
+                />
+              )}
+            </g>
+          ))}
+        </>
+      ) : project.visual === 'disk' ? (
+        <>
+          <rect
+            class="art-sheet"
+            x="28"
+            y="30"
+            width="424"
+            height="154"
+            rx="12"
+          />
+          <circle class="art-status" cx="49" cy="50" r="4" />
+          <path class="art-muted-line" d="M66 50h95M49 72h382" />
+          <rect class="art-chip" x="48" y="94" width="39" height="59" rx="4" />
+          <rect
+            class="art-block"
+            x="94"
+            y="94"
+            width="106"
+            height="59"
+            rx="4"
+          />
+          <rect
+            class="art-block alternate"
+            x="207"
+            y="94"
+            width="106"
+            height="59"
+            rx="4"
+          />
+          <rect
+            class="art-block faint"
+            x="320"
+            y="94"
+            width="112"
+            height="59"
+            rx="4"
+          />
+          <text class="art-small-label" x="68" y="129" text-anchor="middle">
+            MBR
+          </text>
+          <text class="art-small-label" x="147" y="129" text-anchor="middle">
+            Partición 01
+          </text>
+          <text class="art-small-label" x="260" y="129" text-anchor="middle">
+            Partición 02
+          </text>
+          <text class="art-small-label" x="377" y="129" text-anchor="middle">
+            Bloques
+          </text>
+        </>
+      ) : project.visual === 'compiler' ? (
+        <>
+          <rect
+            class="art-sheet"
+            x="34"
+            y="27"
+            width="180"
+            height="156"
+            rx="10"
+          />
+          <path class="art-muted-line" d="M49 53h148" />
+          <circle class="art-status" cx="51" cy="40" r="3" />
+          <text class="art-code" x="51" y="83">
+            {'let x = 4 + 2;'}
+          </text>
+          <text class="art-code muted" x="51" y="108">
+            {'print(x);'}
+          </text>
+          <path class="art-highlight-line" d="M226 105h30m-7-6 7 6-7 6" />
+          <rect
+            class="art-sheet"
+            x="270"
+            y="27"
+            width="176"
+            height="156"
+            rx="10"
+          />
+          <text class="art-code" x="286" y="62">
+            RISC-V
+          </text>
+          <text class="art-code muted" x="286" y="95">
+            {'li t0, 4'}
+          </text>
+          <text class="art-code muted" x="286" y="120">
+            {'li t1, 2'}
+          </text>
+          <text class="art-code" x="286" y="145">
+            {'add t0, t0, t1'}
+          </text>
+        </>
+      ) : project.visual === 'monitor' ? (
+        <>
+          <rect
+            class="art-sheet"
+            x="25"
+            y="25"
+            width="430"
+            height="160"
+            rx="10"
+          />
+          <path
+            class="art-grid-line"
+            d="M45 70h389M45 110h389M45 150h389M105 47v116M185 47v116M265 47v116M345 47v116"
+          />
+          <path
+            class="art-highlight-line"
+            d="m45 136 30-7 25-26 28 8 30-49 25 22 31-5 31 37 31-11 30-38 26 16 28-19 30 9 34-16"
+          />
+          <path
+            class="art-secondary-line"
+            d="m45 150 42-4 37-9 33 4 40-7 35 11 40-12 34 4 43-7 43 10 42-6"
+          />
+        </>
+      ) : (
+        <>
+          {project.visual === 'services' && (
+            <>
+              <path
+                class="art-muted-line"
+                d="M60 106h75m62 0h64m64 0h66M293 107v-68m0 68v68"
+              />
+              <rect
+                class="art-sheet"
+                x="242"
+                y="18"
+                width="105"
+                height="42"
+                rx="7"
+              />
+              <rect
+                class="art-sheet"
+                x="242"
+                y="154"
+                width="105"
+                height="42"
+                rx="7"
+              />
+              <text class="art-small-label" x="294" y="44" text-anchor="middle">
+                Auth / Roles
+              </text>
+              <text
+                class="art-small-label"
+                x="294"
+                y="180"
+                text-anchor="middle"
+              >
+                Dominios
+              </text>
+            </>
+          )}
+          {project.diagram.nodes.map((node, i) => (
+            <g>
+              <rect
+                class:list={['art-sheet', { 'art-main-node': i === 1 }]}
+                x={25 + i * 116}
+                y="75"
+                width="88"
+                height="62"
+                rx="9"
+              />
+              <text
+                class="art-small-label"
+                x={69 + i * 116}
+                y="111"
+                text-anchor="middle"
+              >
+                {node}
+              </text>
+              {i < 3 && (
+                <path
+                  class="art-highlight-line"
+                  d={`M${117 + i * 116} 106h20m-6-5 6 5-6 5`}
+                />
+              )}
+            </g>
+          ))}
+        </>
+      )}
+    </svg>
+  )}
+  <div class="visual-caption">
+    <span class="visual-caption-dot" />
+    {project.diagram.label}
+    <span class="mono">/{project.number}</span>
   </div>
 </div>

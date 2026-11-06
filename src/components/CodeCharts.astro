@@ -1,0 +1,72 @@
+---
+import { githubSnapshot } from '../data/github';
+import { projects } from '../data/projects';
+import { site } from '../data/site';
+const languages = githubSnapshot.languages.filter(
+  (item) => !['HTML', 'CSS', 'Makefile'].includes(item.name),
+);
+const max = Math.max(...languages.map((item) => item.count));
+const own = projects.filter((project) => project.kind === 'own').length;
+const collaboration = projects.length - own;
+---
+
+<section class="code-charts container" aria-label={site.insights.title}>
+  <div class="chart-panel" data-reveal>
+    <div class="chart-heading">
+      <div>
+        <p class="eyebrow">{site.insights.eyebrow}</p>
+        <h3>{site.insights.languagesTitle}</h3>
+      </div>
+      <span class="chart-date">{githubSnapshot.dateLabel}</span>
+    </div>
+    <dl class="language-bars">
+      {languages.map((language) => (
+        <div class="language-row">
+          <dt>{language.name}</dt>
+          <dd>
+            <span class="language-track" aria-hidden="true">
+              <span
+                style={`--bar-width:${(language.count / max) * 100}%;--bar-color:${language.color}`}
+              />
+            </span>
+            <strong>
+              {language.count}
+              <span class="sr-only"> repositorios</span>
+            </strong>
+          </dd>
+        </div>
+      ))}
+    </dl>
+    <p class="chart-note">{site.insights.languageNote}</p>
+  </div>
+  <div class="ownership-panel" data-reveal>
+    <p class="eyebrow">{site.insights.ownershipTitle}</p>
+    <div
+      class="ownership-donut"
+      style={`--own-share:${(own / projects.length) * 100}%`}
+      aria-hidden="true"
+    >
+      <div>
+        <strong>{projects.length}</strong>
+        <span>proyectos</span>
+      </div>
+    </div>
+    <dl class="ownership-legend">
+      <div>
+        <dt>
+          <span class="legend-dot own-dot" />
+          {site.insights.ownLabel}
+        </dt>
+        <dd>{own}</dd>
+      </div>
+      <div>
+        <dt>
+          <span class="legend-dot collaboration-dot" />
+          {site.insights.collaborationLabel}
+        </dt>
+        <dd>{collaboration}</dd>
+      </div>
+    </dl>
+    <p class="chart-note">{site.insights.ownershipNote}</p>
+  </div>
+</section>

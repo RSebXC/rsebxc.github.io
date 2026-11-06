@@ -11,9 +11,43 @@ import ProjectCard from './ProjectCard.astro';
   aria-label={site.sections.projects.eyebrow}
 >
   <SectionHeading {...site.sections.projects} />
+  <div class="project-toolbar">
+    <div class="project-filters" role="group" aria-label="Filtrar proyectos">
+      {[
+        { value: 'all', label: site.labels.all },
+        { value: 'own', label: 'Propios' },
+        { value: 'collaboration', label: 'Colaboraciones' },
+      ].map((filter) => (
+        <button
+          type="button"
+          data-project-filter={filter.value}
+          aria-pressed={filter.value === 'all'}
+        >
+          {filter.label}
+          <span>
+            {filter.value === 'all'
+              ? projects.length
+              : projects.filter((project) => project.kind === filter.value)
+                  .length}
+          </span>
+        </button>
+      ))}
+    </div>
+    <span class="project-count" role="status" aria-live="polite">
+      <span data-project-count>{projects.length}</span> {site.labels.shown}
+    </span>
+  </div>
   <div class="projects-grid">
     {projects.map((project) => (
       <ProjectCard project={project} />
     ))}
   </div>
+  <a
+    class="more-projects"
+    href="https://github.com/RSebXC?tab=repositories"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Explorar todos mis repositorios<span aria-hidden="true">↗</span>
+  </a>
 </section>

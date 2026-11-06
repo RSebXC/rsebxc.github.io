@@ -27,9 +27,19 @@ import Icon from './Icon.astro';
         <a href={item.href}>{item.label}</a>
       ))}
     </nav>
-    <a class="header-contact" href="#contacto">
-      {site.labels.contact}
-      <Icon name="arrow" size={17} />
-    </a>
+    <div class="header-actions">
+      <label class="sr-only" for="theme">
+        {site.labels.theme}
+      </label>
+      <select id="theme" class="header-theme" aria-label={site.labels.theme}>
+        <option value="system">{site.labels.system}</option>
+        <option value="light">{site.labels.light}</option>
+        <option value="dark">{site.labels.dark}</option>
+      </select>
+      <a class="header-contact" href="#contacto">
+        {site.labels.contact}
+        <Icon name="arrow" size={17} />
+      </a>
+    </div>
   </div>
 </header>

@@ -3,6 +3,7 @@ import { profile } from '../data/profile';
 import { site } from '../data/site';
 import { assetUrl } from '../utils/urls';
 import Icon from './Icon.astro';
+import TechIcon from './TechIcon.astro';
 ---
 
 <section class="hero container" id="inicio" aria-labelledby="hero-title">
@@ -22,13 +23,13 @@ import Icon from './Icon.astro';
     <p class="hero-title">{profile.title}</p>
     <p class="hero-intro">{profile.introduction}</p>
     <div class="hero-actions">
-      <a class="button button-primary" href={assetUrl(profile.cv)} download>
-        <Icon name="download" size={18} />
-        {site.labels.download}
-      </a>
-      <a class="button button-quiet" href="#proyectos">
+      <a class="button button-primary" href="#proyectos">
         {site.labels.projects}
         <Icon name="right" size={18} />
+      </a>
+      <a class="button button-quiet" href={assetUrl(profile.cv)} download>
+        <Icon name="download" size={18} />
+        {site.labels.download}
       </a>
     </div>
     <div class="hero-socials">
@@ -46,6 +47,14 @@ import Icon from './Icon.astro';
         <Icon name="mail" size={18} />
         {site.labels.contactButton}
       </a>
+    </div>
+    <div class="hero-tech-strip" aria-label="Tecnologías principales">
+      {site.hero.technologies.map((name) => (
+        <span>
+          <TechIcon name={name} size={19} />
+          {name}
+        </span>
+      ))}
     </div>
   </div>
   <div class="hero-aside">

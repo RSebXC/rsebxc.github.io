@@ -1,0 +1,23 @@
+---
+import { technologyIcons } from '../data/technology';
+import { assetUrl } from '../utils/urls';
+interface Props {
+  name: string;
+  size?: number;
+}
+const { name, size = 19 } = Astro.props;
+const icon = technologyIcons[name];
+---
+
+{icon && (
+  <img
+    class="tech-icon"
+    src={assetUrl(`icons/tech/${icon}.svg`)}
+    width={size}
+    height={size}
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+  />
+)}

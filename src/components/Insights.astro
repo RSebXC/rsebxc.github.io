@@ -1,0 +1,45 @@
+---
+import { githubSnapshot } from '../data/github';
+import { projects } from '../data/projects';
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+const own = projects.filter((project) => project.kind === 'own').length;
+const collaborations = projects.length - own;
+const metrics = [
+  {
+    value: githubSnapshot.repositoryCount,
+    label: site.insights.repositoryLabel,
+    icon: 'github',
+  },
+  { value: projects.length, label: site.insights.projectLabel, icon: 'layers' },
+  { value: own, label: site.insights.ownLabel, icon: 'code' },
+  {
+    value: collaborations,
+    label: site.insights.collaborationLabel,
+    icon: 'git',
+  },
+];
+---
+
+<section class="metrics-wrap container" aria-label={site.insights.eyebrow}>
+  <div class="metrics-grid">
+    {metrics.map((metric) => (
+      <div class="metric">
+        <span class="metric-icon">
+          <Icon name={metric.icon} size={19} />
+        </span>
+        <strong>{String(metric.value).padStart(2, '0')}</strong>
+        <span>{metric.label}</span>
+      </div>
+    ))}
+  </div>
+  <p class="metrics-source">
+    <a href={githubSnapshot.source} target="_blank" rel="noopener noreferrer">
+      {site.insights.sourceLabel}
+      <Icon name="arrow" size={12} />
+    </a>
+    <span>
+      {site.insights.updatedLabel} {githubSnapshot.dateLabel}
+    </span>
+  </p>
+</section>

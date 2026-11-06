@@ -3,15 +3,18 @@ import type { Project } from '../data/types';
 import { site } from '../data/site';
 import Icon from './Icon.astro';
 import ProjectDiagram from './ProjectDiagram.astro';
+import TechIcon from './TechIcon.astro';
 const { project } = Astro.props as { project: Project };
 ---
 
 <article
   class:list={['project-card', { 'project-featured': project.featured }]}
   id={project.id}
+  data-project-kind={project.kind}
+  data-project-card
   data-reveal
 >
-  <ProjectDiagram diagram={project.diagram} featured={project.featured} />
+  <ProjectDiagram project={project} />
   <div class="project-body">
     <div class="project-meta">
       <span>{project.category}</span>
@@ -19,13 +22,24 @@ const { project } = Astro.props as { project: Project };
     </div>
     <h3>{project.title}</h3>
     <p class="project-description">{project.description}</p>
+    <ul class="project-highlights">
+      {project.highlights.map((highlight) => (
+        <li>
+          <Icon name="check" size={14} />
+          {highlight}
+        </li>
+      ))}
+    </ul>
     <p class="project-role">
       <span class="role-marker" />
       {project.role}
     </p>
     <ul class="tags" aria-label={`Tecnologías de ${project.title}`}>
       {project.technologies.map((tech) => (
-        <li>{tech}</li>
+        <li>
+          <TechIcon name={tech} size={14} />
+          {tech}
+        </li>
       ))}
     </ul>
     <details class="project-details">
@@ -44,6 +58,10 @@ const { project } = Astro.props as { project: Project };
         </ul>
       </div>
     </details>
+    <p class="project-proof">
+      <Icon name="layers" size={14} />
+      {project.proof}
+    </p>
     <a
       class="project-link"
       href={project.repository}
@@ -54,6 +72,16 @@ const { project } = Astro.props as { project: Project };
       <Icon name="github" size={18} />
       {site.labels.repository}
       <Icon name="arrow" size={18} />
+    </a>
+    <a
+      class="project-documentation"
+      href={project.documentation}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${site.labels.documentation}: ${project.title}`}
+    >
+      {site.labels.documentation}
+      <Icon name="arrow" size={13} />
     </a>
   </div>
 </article>

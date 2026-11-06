@@ -14,6 +14,34 @@ if (themeSelect) {
   });
 }
 
+const projectFilters = document.querySelectorAll<HTMLButtonElement>(
+  '[data-project-filter]',
+);
+const projectCards = document.querySelectorAll<HTMLElement>(
+  '[data-project-card]',
+);
+const projectCount = document.querySelector<HTMLElement>(
+  '[data-project-count]',
+);
+projectFilters.forEach((button) =>
+  button.addEventListener('click', () => {
+    const selected = button.dataset.projectFilter;
+    projectFilters.forEach((item) =>
+      item.setAttribute('aria-pressed', String(item === button)),
+    );
+    let visible = 0;
+    projectCards.forEach((card) => {
+      const show = selected === 'all' || card.dataset.projectKind === selected;
+      card.hidden = !show;
+      if (show) {
+        visible++;
+        card.classList.remove('reveal-pending');
+      }
+    });
+    if (projectCount) projectCount.textContent = String(visible);
+  }),
+);
+
 const copyButton =
   document.querySelector<HTMLButtonElement>('[data-copy-email]');
 const copyStatus = document.querySelector<HTMLElement>('#copy-status');
