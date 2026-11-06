@@ -2,7 +2,7 @@
 
 [Ver portafolio](https://rsebxc.github.io/) · [Repositorio](https://github.com/RSebXC/rsebxc.github.io) · [Despliegues](https://github.com/RSebXC/rsebxc.github.io/actions/workflows/deploy.yml)
 
-Landing personal en español de **Rodrigo Sebastián Castro Aguilar**, desarrollador backend y soporte de bases de datos. Presenta experiencia, formación y seis proyectos con la contribución individual en cada uno.
+Portafolio personal en español de **Rodrigo Sebastián Castro Aguilar**, desarrollador backend y soporte de bases de datos. Presenta experiencia, formación y nueve casos de proyecto: seis propios y tres colaboraciones, con estado y contribución individual.
 
 Sitio 100 % estático: no requiere servidor de aplicaciones, base de datos ni credenciales. Los enlaces de proyectos llevan al código público; el contacto abre el cliente de correo.
 
@@ -30,9 +30,10 @@ Abre la URL indicada por Astro, normalmente `http://localhost:4321`.
 ```sh
 npm run check        # Tipos de TypeScript y componentes Astro
 npm run build        # Genera dist/
-npm run verify       # Verifica metadatos, anclas, assets y los 6 proyectos
+npm run verify       # Verifica metadatos, anclas, assets y los 9 proyectos
 npm run preview     # Sirve el resultado de producción
 npm run format      # Formato del código
+npm run sync:github  # Actualiza la captura pública de repositorios y lenguajes
 ```
 
 ## Estructura
@@ -46,6 +47,8 @@ src/
 │   ├── experience.ts
 │   ├── skills.ts
 │   ├── education.ts
+│   ├── github.ts     # Captura fechada de datos públicos de GitHub
+│   ├── technology.ts # Relación de tecnologías e iconos locales
 │   ├── site.ts       # Navegación, títulos y textos de interfaz
 │   └── types.ts      # Contratos de datos
 ├── layouts/          # HTML base, metadatos y datos estructurados
@@ -60,7 +63,17 @@ scripts/              # Verificación del resultado compilado
 
 ## Actualizar contenido
 
-Edita los archivos de `src/data/`; no necesitas modificar los componentes. Para un proyecto nuevo, agrega un objeto en `projects.ts` con la descripción, tu aporte, tecnologías, repositorio y diagrama. Si cambia la cantidad de proyectos, actualiza también la expectativa de `scripts/verify-site.mjs`.
+Edita los archivos de `src/data/`; no necesitas modificar los componentes. Para un proyecto nuevo, agrega un objeto en `projects.ts` con problema, aporte, tecnologías, enlaces, estado, tipo (`own` o `collaboration`) y visual. Si cambia la cantidad de proyectos, actualiza también la expectativa de `scripts/verify-site.mjs`.
+
+## Presentación y métricas
+
+- Identidad azul cobalto y violeta, con temas claro/oscuro y selector accesible en la cabecera.
+- Tarjetas con contexto, alcance, contribución, documentación y acceso al código. Filtros para proyectos propios y colaboraciones.
+- Mis Finanzas usa capturas reales del repositorio con datos ficticios. GTVS se presenta como prototipo sobre una red sintética y Barbería como análisis y arquitectura propuesta, sin afirmar una implementación operativa.
+- KPI derivados de la selección: nueve proyectos, seis propios y tres colaboraciones. Los 34 repositorios públicos y los conteos por lenguaje corresponden a la captura de GitHub del 6 de noviembre de 2026.
+- Las barras representan repositorios por lenguaje principal, no porcentajes de dominio ni líneas de código. Se excluyen repositorios sin lenguaje, HTML, CSS y Makefile de esa gráfica.
+- `npm run sync:github` consulta la API pública y actualiza `src/data/github.ts`; revisa y confirma el diff antes de publicar. Admite `GITHUB_TOKEN` opcional en el entorno para evitar límites de consultas. El sitio generado no realiza llamadas a GitHub en el navegador.
+- Iconos locales de [Devicon](https://github.com/devicons/devicon), con licencia MIT conservada en `public/icons/tech/LICENSE.txt`.
 
 - **Foto:** `public/images/rodrigo-castro.webp`. Se extrajo la foto real del CV, no el avatar ilustrado de GitHub. Mantén una imagen cuadrada y actualiza `portraitAlt` si cambia su contenido.
 - **Open Graph:** `public/images/og-rodrigo-castro.jpg`, 1200 × 630. Es una imagen independiente con la misma foto y debe actualizarse si cambia el nombre o perfil.
