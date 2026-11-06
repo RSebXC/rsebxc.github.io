@@ -23,4 +23,19 @@ export interface Project {
   repository: string;
   diagram: { label: string; nodes: string[]; output: string };
   featured?: boolean;
+  kind: 'own' | 'collaboration';
+  stage: string;
+  visual:
+    | 'finance'
+    | 'services'
+    | 'routes'
+    | 'pipeline'
+    | 'queue'
+    | 'monitor'
+    | 'disk'
+    | 'cloud'
+    | 'compiler';
+  highlights: string[];
+  proof: string;
+  documentation: string;
 }

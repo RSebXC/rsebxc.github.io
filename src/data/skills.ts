@@ -7,6 +7,7 @@ export const skillGroups = [
       'Python',
       'TypeScript',
       'Go',
+      'Kotlin',
       'JavaScript',
       'SQL',
       'PL/SQL',

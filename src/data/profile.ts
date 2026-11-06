@@ -7,7 +7,7 @@ export const profile = {
   title: 'Desarrollador backend y soporte de bases de datos',
   tagline: 'Código con propósito. Soluciones que funcionan.',
   introduction:
-    'Conecto lógica, datos e infraestructura para construir software útil y resolver los problemas que aparecen en el camino.',
+    'Diseño y construyo sistemas desde la idea hasta el código: APIs, datos, infraestructura y productos que se pueden explorar, explicar y mejorar.',
   location: 'Ciudad de Guatemala, Guatemala',
   locationShort: 'Guatemala',
   email: 'RS.CASTRO0417@gmail.com',
@@ -22,12 +22,12 @@ export const profile = {
   seo: {
     title: 'Rodrigo Castro | Backend, bases de datos y soporte',
     description:
-      'Portafolio de Rodrigo Sebastián Castro Aguilar. Desarrollo backend, soporte de bases de datos y proyectos con Java, TypeScript, Go, Python y cloud. Guatemala.',
+      'Proyectos propios y colaboraciones de Rodrigo Castro: backend, bases de datos, Android y cloud. Arquitectura, código y experiencia profesional en Guatemala.',
   },
   about: [
     'Me interesa entender cómo funciona un sistema, desde la lógica de una API hasta los datos que la sostienen. Esa curiosidad me ha llevado a trabajar en desarrollo backend, soporte de sistemas institucionales y resolución de incidencias en bases de datos.',
     'En la SAT desarrollo y mantengo aplicaciones Java, analizo información en Oracle y preparo scripts SQL y PL/SQL. En mis proyectos he explorado microservicios, infraestructura cloud, ingeniería de datos y sistemas en Go.',
-    'Estoy cerrando mi etapa universitaria en Ingeniería en Ciencias y Sistemas en la USAC, con pensum cerrado y pendiente de graduación. Disfruto resolver problemas, aprender por mi cuenta y coordinar el trabajo para llevar una idea a una solución concreta.',
+    'Tengo pensum cerrado en Ingeniería en Ciencias y Sistemas en la USAC y estoy pendiente de graduación. En mis proyectos propios defino el contexto, los casos de uso y la arquitectura; también utilizo herramientas de IA para apoyar la implementación y mantengo la responsabilidad sobre las decisiones y su revisión.',
   ],
   focus: [
     {
